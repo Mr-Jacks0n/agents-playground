@@ -24,6 +24,7 @@ function hashStr(s) {
 
 /* ── Dictionnaires de la factory ────────────────────────────────── */
 const ROLES = {
+  skills:  { name: 'Compétences',      icon: '🧩', color: 'var(--goldsoft)' },
   orch:    { name: 'Orchestrator',    icon: '🧠', color: 'var(--gold)' },
   arch:    { name: 'Architecte',      icon: '📐', color: 'var(--goldsoft)' },
   eng:     { name: 'Ingénieur',       icon: '🛠️', color: 'var(--goldsoft)' },
@@ -34,6 +35,7 @@ const ROLES = {
 };
 
 const STAGES = [
+  { id: 'skills', label: 'Catalogue & sélection de compétences' },
   { id: 'orch', label: 'Découpage en sous-tâches' },
   { id: 'arch', label: 'ADR & design des interfaces' },
   { id: 'eng',  label: 'Implémentation' },
@@ -62,10 +64,35 @@ const IDEA_EXAMPLES = [
   'Flux de streaming vidéo HTTP entre PC et téléphone',
 ];
 
+/* ── Catalogue local de compétences (sélection par l'agent) ───────
+   Chaque entrée déclare ses déclencheurs (« quand l'utiliser ») et
+   son niveau de risque : none · safe · critical. La sélection est
+   déterministe, locale, et le plan est prévisualisé AVANT execution. */
+const SKILLS = [
+  { id: 'threat-model',       trigger: /\b(api|sync|réseau|serveur|endpoint|HTTP|HTTPS)\b/i,            risk: 'safe' },
+  { id: 'privacy-by-design',  trigger: /\b(donn|nom|personnel|caisse|clôture|export|user)\b/i,          risk: 'safe' },
+  { id: 'invariant-guard',    trigger: /\b(store|état|partag|presse|sync|rappel)\b/i,                   risk: 'safe' },
+  { id: 'output-a11y',        trigger: /\b(UI|écran|affiche|bouton|interface)\b/i,                      risk: 'none' },
+  { id: 'file-secure-export', trigger: /\b(export|pdf|fichier|attache)\b/i,                             risk: 'safe' },
+  { id: 'stream-guard',       trigger: /\b(stream|vidéo|flux|transfert)\b/i,                            risk: 'safe' },
+  { id: 'memory-guard',       trigger: /\b(mémoris|mémoire|souviens)\b/i,                               risk: 'safe' },
+  { id: 'destructive-ops',    trigger: /\b(delete|supprim|drop|efface|truncate|admin)\b/i,              risk: 'critical' },
+];
+const SKILL_FALLBACK = 'code-review-basics';   // compétence de base, risque none
+const fakeDigest = (idea, salt) => 'sha256:' + hashStr(idea + salt).toString(16).padStart(8,'0')
+  + hashStr(salt + idea).toString(16).padStart(8,'0')
+  + hashStr((idea + salt).toLowerCase()).toString(16).padStart(8,'0'); // tronqué, simulé
+
+function skillsFor(idea) {
+  const hits = SKILLS.filter((s) => s.trigger.test(idea));
+  return hits.length ? hits : [{ id: SKILL_FALLBACK, risk: 'none' }];
+}
+
 /* ── Génération du plan (deterministe par tache) ─────────────────── */
 function planFor(idea) {
   const rng = mulberry32(hashStr(idea.toLowerCase().trim()));
   const risks = RISK_WORDS.filter((r) => r.re.test(idea));
+  const skills = skillsFor(idea);
   const subtasks = [];
   const n = 2 + Math.floor(rng() * 2);
   for (let i = 0; i < n; i++) {
@@ -76,7 +103,8 @@ function planFor(idea) {
   const adv = pick(rng, ['path traversal', 'timeout/cancel storm', 'unicode au path', 'malformed frame', 'double submit', 'race sur le store']);
   const vetoed = risks.length > 0;
   const secNote = vetoed || (rng() < 0.35 && !risks.length);
-  return { idea, subtasks, tests, adv, risks, vetoed, secNote, fixedAfter: vetoed };
+  const backupFns = skills.some((s) => s.risk === 'critical');
+  return { idea, skills, subtasks, tests, adv, risks, vetoed, secNote, backupFns, fixedAfter: vetoed };
 }
 function pick(rng, arr) { return arr[Math.floor(rng() * arr.length)]; }
 
@@ -86,6 +114,12 @@ function stageLogs(plan, stageIndex) {
   const t = plan.idea.trim();
   const logs = [];
   switch (s.id) {
+    case 'skills':
+      logs.push(`[catalogue] ${SKILLS.length} compétences indexées · déclencheurs + niveau de risque vérifiés`);
+      logs.push("sélection de l'agent: " + plan.skills.map((k) => `${k.id} (${k.risk})`).join(' · '));
+      logs.push(`prévisualisation du plan: opérations=immutables · sauvegarde requise: ${plan.backupFns ? 'OUI' : 'non'}`);
+      logs.push(`empreintes: manifeste ${fakeDigest(t, 'cat').slice(0, 19)}… · arbre-simulé ${fakeDigest(t, 'tree').slice(0, 19)}…`);
+      break;
     case 'orch':
       logs.push(`[task received] "${t}`);
       logs.push(`répartition en ${plan.subtasks.length} sous-tâches → eng: /${plan.subtasks.join(' · eng: ')}`);

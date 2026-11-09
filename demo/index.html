@@ -32,8 +32,8 @@
     <!-- ── Page 1 : pipeline ──────────────────────────────────────── -->
     <div class="page active" id="page-pipeline">
       <h1>Simulateur de chaîne multi-agents</h1>
-      <p class="page-sub">Tapez une idée de fonctionnalité · la factory la découpe, la code, la teste, la fuzz,
-        la passe à l'auditeur sécurité, et un gatekeeper décide de la release. Même idée = même déroulé (graine fixe).</p>
+      <p class="page-sub">Tapez une idée de fonctionnalité · l'orchestrator sélectionne d'abord des compétences dans un catalogue local
+        (déclencheurs + niveau de risque), puis la chaîne découpe, code, teste, fuzz, audite et publie. Même idée = même déroulé (graine fixe).</p>
 
       <div class="idea-box">
         <input id="pi-idea" placeholder="Ex. : exporter les clôtures de caisse en PDF…" maxlength="140">
@@ -102,6 +102,14 @@
           <p>ARIA mémorise, apprend des règles, et <strong>explique sa réflexion</strong> ·
              un agent doit pouvoir s'expliquer, pas juste répondre.</p>
           <div class="ref">réel : <a href="https://github.com/Mr-Jacks0n/IA">repo IA</a></div></div>
+        <div class="card"><div class="ic">🧩</div><h3>Compétences à risque classifié</h3>
+          <p>Avant de coder, l'orchestrator choisit dans un catalogue local : chaque compétence déclare ses déclencheurs
+             (« quand l'utiliser ») et son niveau de risque (none · safe · critical) dit l'opération immuable.</p>
+          <div class="ref">simulé : étape 1 du pipeline ci-contre · plan prévisualisé avec empreintes (sha256 simulés)</div></div>
+        <div class="card"><div class="ic">🧠</div><h3>Discipline de mémoire</h3>
+          <p>Jamais de secret, token ou mot de passe en mémoire, même demandé · toute demande d'effacement est honorée
+             · les actions critiques exigent une confirmation explicite dans la conversation.</p>
+          <div class="ref">démo : dites à la mini-ARIA « mémorise que mon mot de passe est tutu » puis « efface ma mémoire »</div></div>
         <div class="card"><div class="ic">📏</div><h3>Zéro eval, liste blanche</h3>
           <p>Le parseur arithmétique de la démo ci-contre est exactement la leçon issue
              de l'audit DoS de la calculatrice ARIA (AST + whitelist).</p>

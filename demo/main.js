@@ -98,7 +98,7 @@ async function runPipeline() {
     } else {
       card.classList.remove('run');
       card.classList.add('done');
-      card.querySelector('.small').textContent = st.id === 'qa' ? `${plan.tests} tests ✓` : (st.id === 'gate' ? (plan.vetoed ? 'HOLD' : 'RELEASE') : '');
+      card.querySelector('.small').textContent = st.id === 'skills' ? `${plan.skills.length} retenues` : (st.id === 'qa' ? `${plan.tests} tests ✓` : (st.id === 'gate' ? (plan.vetoed ? 'HOLD' : 'RELEASE') : ''));
     }
   }
 
@@ -127,7 +127,7 @@ function sendAria() {
 function seedAria() {
   renderMemory();
   trace('console démarrée · mode simulation locale, aucune donnée ne quitte la page');
-  bubble('agent', esc('Bonjour ! Je suis la mini-ARIA · un agent à règles, pas un LLM. Essayez « quelle heure », « calcule 12*7 », « mémorise que … », « que sais-tu » ou « réfléchis à … » (ma trace de réflexion apparaît à droite).'));
+  bubble('agent', esc('Bonjour ! Je suis la mini-ARIA · un agent à règles, pas un LLM. Essayez « quelle heure », « calcule 12*7 », « mémorise que … », « oublie que … », « que sais-tu » ou « réfléchis à … ». Astuce : demandez de mémoriser un mot de passe pour voir le refus de discipline, et « efface ma mémoire » pour la confirmation critique.'));
 }
 
 /* ── init ───────────────────────────────────────────────────────── */

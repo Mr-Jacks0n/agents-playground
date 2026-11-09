@@ -73,7 +73,7 @@ a { color: var(--goldsoft); }
   color: var(--muted); font-size: 12px; border-radius: 999px; padding: 6px 13px; cursor: pointer; }
 .examples .ex:hover { color: var(--goldsoft); border-color: var(--gold); }
 
-.flow { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin: 20px 0 16px; }
+.flow { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; margin: 20px 0 16px; }
 .stage { background: var(--surface); border: 1px solid var(--bordersoft); border-radius: 12px;
   padding: 10px 8px; text-align: center; font-size: 10.5px; color: var(--muted2); min-height: 74px;
   display: flex; flex-direction: column; gap: 7px; justify-content: center; align-items: center;
@@ -147,7 +147,6 @@ body::after {
   border: 1px dashed rgba(164,160,148,.25); border-radius: 99px; padding: 4px 10px;
 }
 @media (max-width: 900px) {
-  .flow { grid-template-columns: repeat(4, 1fr); }
-  .aria-grid { grid-template-columns: 1fr; }
+  .flow { grid-template-columns: repeat(4, 1fr); }  .aria-grid { grid-template-columns: 1fr; }
   .bubble.you { margin-left: 0; }
 }

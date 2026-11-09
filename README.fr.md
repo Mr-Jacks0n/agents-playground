@@ -29,12 +29,16 @@ Tapez une idée de fonctionnalité. Une chaîne d'agents simulée reproduit la
 méthode réelle utilisée dans [LanceFer](https://github.com/Mr-Jacks0n/LanceFer) :
 
 ```
-Orchestrator → Architecte → Ingénieur → QA (tests + adversarial)
+Compétences → Orchestrator → Architecte → Ingénieur → QA (tests + adversarial)
 → Auditeur sécurité (VETO possible) → Gatekeeper release
 ```
 
 - Déterministe : la même idée produit toujours le même déroulé (PRNG avec
   graine, `mulberry32`).
+- D'abord, l'orchestrator **sélectionne des compétences dans un catalogue
+  local** : chaque entrée déclare des déclencheurs explicites (« quand
+  l'utiliser ») et un niveau de risque (`none · safe · critical`), et le plan
+  est **prévisualisé avant exécution** avec des empreintes de manifeste simulées.
 - L'**auditeur sécurité** parcourt votre idée avec un lexique de risques
   (secret en dur, `eval()`, HTTP non chiffré, opérations destructives, données
   personnelles…) et peut poser un **veto** sur la release · exactement la
@@ -49,8 +53,13 @@ Orchestrator → Architecte → Ingénieur → QA (tests + adversarial)
 La miniature d'[ARIA](https://github.com/Mr-Jacks0n/IA), l'agent apprenant
 personnel de Mr Jackson :
 
-- reconnaissance d'intents (pas de magie : des règles lisibles et assumées),
-- mémoire de session (« mémorise que … »),
+- reconnaissance d'intents (pas de magie : des règles lisibles et assumées,
+  chacune avec son niveau de risque),
+- mémoire de session (« mémorise que … ») **avec discipline de mémoire** :
+  secrets, tokens et mots de passe jamais stockés, même sur demande ·
+  toute demande d'effacement explicite (« oublie que … ») est honorée ·
+  une purge destructive (« efface ma mémoire ») exige une confirmation
+  explicite dans la conversation,
 - une **trace de réflexion transparente** · l'agent montre comment il raisonne,
 - un **parseur arithmétique sûr à liste blanche** · la leçon directe de l'audit
   réel `eval()`/DoS de la calculatrice d'ARIA.
@@ -88,7 +97,7 @@ python3 -m http.server 8000
 | Chemin | Rôle |
 |---|---|
 | `demo/index.html` | coquille à 3 onglets (pipeline · mini-ARIA · méthode) |
-| `demo/pipeline.js` | moteur : PRNG, génération de plan, lexique de risques, logs par étape, verdict |
+| `demo/pipeline.js` | moteur : PRNG, catalogue local de compétences (risque classifié), génération de plan, lexique de risques, logs par étape, verdict |
 | `demo/aria.js` | mini-agent : intents, mémoire de session, trace de réflexion, parseur sûr |
 | `demo/main.js` | orchestration DOM : onglets, animation des étapes, binding du chat |
 | `demo/styles.css` | tokens de marque (or `#bc9c22` sur près-noir), grille de flux, chat, trace |

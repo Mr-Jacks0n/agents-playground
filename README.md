@@ -29,14 +29,17 @@ Type an idea for a software feature. A simulated agent chain reproduces the real
 method used in [LanceFer](https://github.com/Mr-Jacks0n/LanceFer):
 
 ```
-Orchestrator → Architecte → Ingénieur → QA (tests + adversarial)
+Compétences → Orchestrator → Architecte → Ingénieur → QA (tests + adversarial)
 → Auditeur sécurité (VETO possible) → Gatekeeper release
 ```
 
 - Deterministic: the same idea always produces the same run (seeded PRNG, `mulberry32`).
+- First, the orchestrator **selects competencies from a local catalog**: each entry
+  declares explicit triggers ("when to use") and a risk level (`none · safe · critical`),
+  and the plan is **previewed before execution** with simulated manifest digests.
 - The **security auditor** scans your idea against a risk lexicon
   (hard-coded secrets, `eval()`, unencrypted HTTP, destructive ops, personal data…)
-  and can **veto** the release · exactly the safety posture used in the real factory.
+  and can **veto** the release · the gatekeeper never overrides a veto.
 - A gated release is the *only* outcome when the input is risky. That's the point.
 - The numbers referenced in the UI are real repo stats (145 Node + 59 JVM tests
   on LanceDrop), not invented ones.
@@ -46,8 +49,11 @@ Orchestrator → Architecte → Ingénieur → QA (tests + adversarial)
 A miniature of [ARIA](https://github.com/Mr-Jacks0n/IA), Mr Jackson's personal
 learning agent:
 
-- intent matching (no magic: recognizable, readable rules),
-- session memory ("mémorise que …"),
+- intent matching (no magic: recognizable, readable rules, each carrying its own risk level),
+- session memory ("mémorise que …") **with memory discipline**: secrets, tokens and
+  passwords are never stored, even on request · explicit deletion requests ("oublie que …")
+  are honored · destructive wipes ("efface ma mémoire") require an explicit
+  in-conversation confirmation,
 - a **transparent reflection trace** · the agent shows how it reasons,
 - a **safe arithmetic parser with a whitelist** · the direct lesson from the
   real `eval()`/DoS audit on ARIA.
@@ -83,7 +89,7 @@ python3 -m http.server 8000
 | Path | Role |
 |---|---|
 | `demo/index.html` | 3-tab shell (pipeline · mini-ARIA · method) |
-| `demo/pipeline.js` | pipeline engine: PRNG, plan generation, risk lexicon, per-stage logs, verdict |
+| `demo/pipeline.js` | pipeline engine: PRNG, local skill catalog (risk classification), plan generation, risk lexicon, per-stage logs, verdict |
 | `demo/aria.js` | mini-agent: intents, session memory, reflection trace, safe parser |
 | `demo/main.js` | DOM orchestration: tabs, stage animation, chat binding |
 | `demo/styles.css` | brand tokens (gold `#bc9c22` on near-black), flow grid, chat, trace |
