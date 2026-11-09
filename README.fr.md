@@ -2,7 +2,7 @@
 
 ![agents-playground](demo/banner.png)
 
-**Les démos interactives de la méthode agents IA de Mr Jackson — 100 % dans votre navigateur.**
+**Les démos interactives de la méthode agents IA de Mr Jackson · 100 % dans votre navigateur.**
 
 [![License](https://img.shields.io/badge/licence-MIT-bc9c22)](LICENSE)
 [![No backend](https://img.shields.io/badge/backend-aucun-bc9c22)](demo/)
@@ -18,12 +18,12 @@
 ---
 
 Deux démos interactives, un objectif : *montrer comment les vrais agents IA
-industrialisés sont construits — et quels garde-fous ils traversent* — sans
+industrialisés sont construits · et quels garde-fous ils traversent* · sans
 prétendre que quoique ce soit en train de tourner.
 
 ## Ce que vous avez
 
-### 🏭 Onglet 1 — Pipeline multi-agents de factory (simulé)
+### 🏭 Onglet 1 · Pipeline multi-agents de factory (simulé)
 
 Tapez une idée de fonctionnalité. Une chaîne d'agents simulée reproduit la
 méthode réelle utilisée dans [LanceFer](https://github.com/Mr-Jacks0n/LanceFer) :
@@ -37,33 +37,33 @@ Orchestrator → Architecte → Ingénieur → QA (tests + adversarial)
   graine, `mulberry32`).
 - L'**auditeur sécurité** parcourt votre idée avec un lexique de risques
   (secret en dur, `eval()`, HTTP non chiffré, opérations destructives, données
-  personnelles…) et peut poser un **veto** sur la release — exactement la
+  personnelles…) et peut poser un **veto** sur la release · exactement la
   posture de sécurité de la vraie factory.
 - Une release bloquée est l'*unique* issue quand l'idée est risquée. C'est
   voulu : le gatekeeper n'outrepasse jamais un veto.
 - Les chiffres cités dans l'interface sont des statistiques réelles de dépôt
   (145 tests Node + 59 JVM sur LanceDrop), pas des inventions.
 
-### 🤖 Onglet 2 — Console d'agent à règles (mini-ARIA)
+### 🤖 Onglet 2 · Console d'agent à règles (mini-ARIA)
 
 La miniature d'[ARIA](https://github.com/Mr-Jacks0n/IA), l'agent apprenant
 personnel de Mr Jackson :
 
 - reconnaissance d'intents (pas de magie : des règles lisibles et assumées),
 - mémoire de session (« mémorise que … »),
-- une **trace de réflexion transparente** — l'agent montre comment il raisonne,
-- un **parseur arithmétique sûr à liste blanche** — la leçon directe de l'audit
+- une **trace de réflexion transparente** · l'agent montre comment il raisonne,
+- un **parseur arithmétique sûr à liste blanche** · la leçon directe de l'audit
   réel `eval()`/DoS de la calculatrice d'ARIA.
 
 Tout vit dans la page. Un rechargement = mémoire propre.
 
-### 📐 Onglet 3 — La méthode
+### 📐 Onglet 3 · La méthode
 
 Six cartes qui relient chaque concept simulé au dépôt réel où il vit.
 
 ## Ce que ce n'est pas
 
-- ❌ Pas de LLM, pas de UI branchée sur un modèle — aucune clé d'API,
+- ❌ Pas de LLM, pas de UI branchée sur un modèle · aucune clé d'API,
   aucune inférence.
 - ❌ Aucun réseau : pas de télémétrie, pas de persistance au-delà de la page.
 - ❌ Ce n'est pas une affirmation que des agents tournent ici. C'est une

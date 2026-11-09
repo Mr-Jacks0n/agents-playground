@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>agents-playground — l'atelier d'agents IA de Mr Jackson (démo)</title>
+  <title>agents-playground · l'atelier d'agents IA de Mr Jackson (démo)</title>
   <meta name="description" content="Démo interactive : la chaîne multi-agents de la factory Mr Jackson (orchestrator → architecte → dev → QA → veto sécurité → release) et une console d'agent à règles. 100 % navigateur, aucun LLM, aucune donnée réelle.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23bc9c22'/%3E%3Ccircle cx='12' cy='12' r='6.4' fill='none' stroke='%2317130a' stroke-width='2.4'/%3E%3Ccircle cx='12' cy='12' r='2.6' fill='%2317130a'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,11 +14,11 @@
 <body>
   <div class="wrap">
     <a class="hero-banner" href="https://github.com/Mr-Jacks0n/agents-playground">
-      <img src="banner.png" alt="agents-playground — l'atelier d'agents IA de Mr Jackson">
+      <img src="banner.png" alt="agents-playground · l'atelier d'agents IA de Mr Jackson">
     </a>
 
     <div class="demo-chip-row">
-      <span class="chip">⚠️ MODE DÉMO — SIMULATION</span>
+      <span class="chip">⚠️ MODE DÉMO · SIMULATION</span>
       <span class="chip mute">déterministe par graine</span>
       <span class="chip mute">0 backend · 0 réseau · 0 donnée réelle</span>
     </div>
@@ -32,7 +32,7 @@
     <!-- ── Page 1 : pipeline ──────────────────────────────────────── -->
     <div class="page active" id="page-pipeline">
       <h1>Simulateur de chaîne multi-agents</h1>
-      <p class="page-sub">Tapez une idée de fonctionnalité — la factory la découpe, la code, la teste, la fuzz,
+      <p class="page-sub">Tapez une idée de fonctionnalité · la factory la découpe, la code, la teste, la fuzz,
         la passe à l'auditeur sécurité, et un gatekeeper décide de la release. Même idée = même déroulé (graine fixe).</p>
 
       <div class="idea-box">
@@ -83,13 +83,13 @@
     <!-- ── Page 3 : méthode ───────────────────────────────────────── -->
     <div class="page" id="page-method">
       <h1>La méthode derrière ces démos</h1>
-      <p class="page-sub">Ce que les deux démos ci-dessus simulent — et où ça vit pour de vrai dans les dépôts.</p>
+      <p class="page-sub">Ce que les deux démos ci-dessus simulent · et où ça vit pour de vrai dans les dépôts.</p>
 
       <div class="cards">
         <div class="card"><div class="ic">🧠</div><h3>Agent orchestrator</h3>
           <p>Un agent ne suffit pas : il faut un chef d'orchestre qui découpe, répartit,
              impose des contraintes (CI verte, zéro secret versionné) et re-synchronise.</p>
-          <div class="ref">réel : factory <a href="https://github.com/Mr-Jacks0n/LanceFer#readme">LanceFer — FEATURE.md</a></div></div>
+          <div class="ref">réel : factory <a href="https://github.com/Mr-Jacks0n/LanceFer#readme">LanceFer · FEATURE.md</a></div></div>
         <div class="card"><div class="ic">🛡️</div><h3>Veto d'audit sécurité</h3>
           <p>L'auditeur peut BLOQUER une release, même quand tout le reste est vert.
              Le gatekeeper n'outrepasse jamais un veto.</p>
@@ -99,7 +99,7 @@
              contraste AAA. 145 + 59 tests réels dans LanceDrop.</p>
           <div class="ref">réel : <a href="https://github.com/Mr-Jacks0n/LanceFer">LanceFer /test</a></div></div>
         <div class="card"><div class="ic">🧪</div><h3>Agent apprenant transparent</h3>
-          <p>ARIA mémorise, apprend des règles, et <strong>explique sa réflexion</strong> —
+          <p>ARIA mémorise, apprend des règles, et <strong>explique sa réflexion</strong> ·
              un agent doit pouvoir s'expliquer, pas juste répondre.</p>
           <div class="ref">réel : <a href="https://github.com/Mr-Jacks0n/IA">repo IA</a></div></div>
         <div class="card"><div class="ic">📏</div><h3>Zéro eval, liste blanche</h3>
@@ -109,13 +109,13 @@
         <div class="card"><div class="ic">🔗</div><h3>Hygiène de repo appliquée aux agents</h3>
           <p>Filigrane « données fictives », historique git propre (réécrit si besoin),
              licence MIT, chiffres mesurés plutôt que promis.</p>
-          <div class="ref">réel : les 5 dépôts du profil — <a href="https://github.com/Mr-Jacks0n">github.com/Mr-Jacks0n</a></div></div>
+          <div class="ref">réel : les 5 dépôts du profil · <a href="https://github.com/Mr-Jacks0n">github.com/Mr-Jacks0n</a></div></div>
       </div>
 
       <div class="footer-note">
         <strong>Note importante :</strong> cette page exécute une <strong>simulation</strong>
         entièrement locale (graine déterministe, aucun réseau, aucun LLM). Elle ne représente
-        pas des agents vivants en train de tourner — elle <em>montre</em> la mécanique et les
+        pas des agents vivants en train de tourner · elle <em>montre</em> la mécanique et les
         garde-fous que je mets dans les agents réels, avec des liens vers les dépôts où ils vivent.
       </div>
     </div>

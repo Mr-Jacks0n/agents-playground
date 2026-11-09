@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   agents-playground — Pipeline multi-agents (mode simulation)
+   agents-playground · Pipeline multi-agents (mode simulation)
    Reproduit la chaîne réelle de la factory LanceFer : Orchestrator ->
    Architecte -> Ingénieur(s) -> QA (tests + adversarial) ->
    Auditeur sécurité (veto possible) -> Gatekeeper release.
@@ -7,7 +7,7 @@
    AUCUN appel réseau, AUCUNE donnée réelle.
    ═══════════════════════════════════════════════════════════════ */
 
-/* PRNG déterministe (mulberry32) — même tâche = même plan */
+/* PRNG déterministe (mulberry32) · même tâche = même plan */
 function mulberry32(a) {
   return function () {
     a |= 0; a = (a + 0x6d2b79f5) | 0;
@@ -110,7 +110,7 @@ function stageLogs(plan, stageIndex) {
     case 'security':
       if (plan.risks.length) {
         for (const r of plan.risks) {
-          logs.push(`🛑 VETO — ${r.issue}`);
+          logs.push(`🛑 VETO · ${r.issue}`);
           logs.push(`   fix demandé : ${r.fix}`);
         }
         logs.push('gatekeeper: NON-PUBLIÉ tant que le fix n\'est pas appliqué');
@@ -122,9 +122,9 @@ function stageLogs(plan, stageIndex) {
       break;
     case 'gate':
       if (plan.vetoed) {
-        logs.push('⏸ HOLD — release bloquée par veto sécurité (fix à appliquer avant re-run)');
+        logs.push('⏸ HOLD · release bloquée par veto sécurité (fix à appliquer avant re-run)');
       } else {
-        logs.push(`✓ ALLOW — release attachée à un tag v* · artefacts construits par CI`);
+        logs.push(`✓ ALLOW · release attachée à un tag v* · artefacts construits par CI`);
         logs.push('historique: tache → ADR → tests → veto → release tracés immuablement');
       }
       break;
@@ -133,5 +133,5 @@ function stageLogs(plan, stageIndex) {
 }
 
 const verdict = (plan) => plan.vetoed
-  ? { cls: 'danger', text: 'VETO SÉCURITÉ — fix exigé, release en attente' }
+  ? { cls: 'danger', text: 'VETO SÉCURITÉ · fix exigé, release en attente' }
   : { cls: 'ok', text: 'RELEASE AUTORISÉE ✓ QA + audit de sécurité passés' };

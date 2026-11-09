@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   agents-playground — orchestration de l'interface
+   agents-playground · orchestration de l'interface
    Tabs, simulateur de pipeline (animation séquentielle), console
    mini-ARIA. Zéro framework, zéro réseau : juste du DOM.
    ═══════════════════════════════════════════════════════════════ */
@@ -19,7 +19,7 @@ document.querySelectorAll('.tab').forEach((btn) => {
 });
 
 /* ═════════════════════════════════════════════════════════════════
-   PIPELINE — flux, exemples, exécution animée
+   PIPELINE · flux, exemples, exécution animée
    ═════════════════════════════════════════════════════════════════ */
 
 /* construire la grille de 7 étapes depuis STAGES + ROLES */
@@ -94,7 +94,7 @@ async function runPipeline() {
     if (st.id === 'security' && plan.vetoed) {
       card.classList.add('error');
       card.querySelector('.small').textContent = 'VETO ✋';
-      logConsole('audit sécurité : release refusée — retour au développeur obligatoire', 'err');
+      logConsole('audit sécurité : release refusée · retour au développeur obligatoire', 'err');
     } else {
       card.classList.remove('run');
       card.classList.add('done');
@@ -107,15 +107,15 @@ async function runPipeline() {
   vd.classList.remove('ok', 'danger');
   vd.classList.add(v.cls);
   vd.textContent = plan.vetoed
-    ? `⛔ ${v.text} — retirez les éléments risqués (ou appliquez les fixes proposés) et relancez la chaîne.`
-    : `🚀 ${v.text} — les mêmes étapes que dans la vraie factory`;
+    ? `⛔ ${v.text} · retirez les éléments risqués (ou appliquez les fixes proposés) et relancez la chaîne.`
+    : `🚀 ${v.text} · les mêmes étapes que dans la vraie factory`;
 
   running = false;
   $('pi-run').disabled = false;
 }
 
 /* ═════════════════════════════════════════════════════════════════
-   MINI-ARIA — binding de la console
+   MINI-ARIA · binding de la console
    ═════════════════════════════════════════════════════════════════ */
 
 function sendAria() {
@@ -127,7 +127,7 @@ function sendAria() {
 function seedAria() {
   renderMemory();
   trace('console démarrée · mode simulation locale, aucune donnée ne quitte la page');
-  bubble('agent', esc('Bonjour ! Je suis la mini-ARIA — un agent à règles, pas un LLM. Essayez « quelle heure », « calcule 12*7 », « mémorise que … », « que sais-tu » ou « réfléchis à … » (ma trace de réflexion apparaît à droite).'));
+  bubble('agent', esc('Bonjour ! Je suis la mini-ARIA · un agent à règles, pas un LLM. Essayez « quelle heure », « calcule 12*7 », « mémorise que … », « que sais-tu » ou « réfléchis à … » (ma trace de réflexion apparaît à droite).'));
 }
 
 /* ── init ───────────────────────────────────────────────────────── */
